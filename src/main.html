@@ -1,0 +1,78 @@
+<mat-card style="margin: 25px">
+  <mat-card-header>
+    <mat-card-title
+      style="
+        margin-top: -16px;
+        margin-left: -16px;
+        margin-right: -16px;
+        margin-bottom: 16px;
+      "
+    >
+      <mat-toolbar
+        color="primary"
+        style="border-top-right-radius: 4px; border-top-left-radius: 4px"
+      >
+        Payment Element Example
+      </mat-toolbar>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div [formGroup]="checkoutForm">
+      <div style="display: flex; flex-direction: row; gap: 10px">
+        <mat-form-field appearance="outline" style="flex: 1">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="flex: 1">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="flex: 1">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+      </div>
+      <div style="margin-bottom: 10px"></div>
+      @if (elementsOptions.clientSecret) {
+      <ngx-stripe-elements
+        [stripe]="stripe"
+        [elementsOptions]="elementsOptions"
+      >
+        <ngx-stripe-payment />
+      </ngx-stripe-elements>
+      }
+      <div style="margin-bottom: 20px"></div>
+      <mat-divider></mat-divider>
+      <div style="margin-bottom: 20px"></div>
+      <div style="text-align: right">
+        <button
+          mat-stroked-button
+          color="warn"
+          [disabled]="paying"
+          (click)="clear()"
+          style="margin-right: 16px"
+        >
+          CLEAR
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="paying()"
+          (click)="collectPayment()"
+        >
+          @if (paying()) {
+          <span>PROCESSING...</span>
+          } @else {
+          <span>
+            PAY @if (amount) {
+            <span>{{ amount | currency }}</span>
+            }
+          </span>
+          }
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

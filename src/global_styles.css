@@ -1,0 +1,16 @@
+/* Add application styles & imports to this file! */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  background: whitesmoke;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.mat-mdc-card-header-text {
+  width: 100%;
+}
